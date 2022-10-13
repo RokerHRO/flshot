@@ -1,0 +1,47 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0305
+header_name {.h}
+code_name {.cxx}
+decl {\#include "playfield.hh"} {public global
+}
+
+Function {} {open
+} {
+  Fl_Window mainwin {
+    label {FLTK Baby} open
+    xywh {161 161 485 320} type Double color 16 resizable
+    code0 {mainwin->fullscreen();} noborder size_range {485 330 485 330} visible
+  } {
+    Fl_Group grp_left {open
+      xywh {0 0 65 335}
+    } {
+      Fl_Button btn_quit {
+        label {Quit!}
+        callback {exit(0);}
+        xywh {10 10 50 20} down_box DOWN_BOX shortcut 0x40071 labelsize 12 deactivate
+      }
+      Fl_Output out_lives {
+        label {Leben:}
+        xywh {10 61 55 32} box FLAT_BOX color 16 labelsize 18 align 1 textfont 1 textsize 28 textcolor 67
+        code0 {o->value("4");}
+      }
+      Fl_Output out_level {
+        label {Level:}
+        xywh {10 124 55 31} box FLAT_BOX color 16 labelsize 18 align 1 textfont 1 textsize 28 textcolor 81
+        code0 {o->value("1");}
+      }
+      Fl_Output out_points {
+        label {Punkte:}
+        xywh {10 184 55 31} box FLAT_BOX color 16 labelsize 18 align 1 textfont 1 textsize 28
+        code0 {o->value("0");}
+      }
+      Fl_Box {} {
+        xywh {0 219 65 116} resizable
+      }
+    }
+    Fl_Box playfield {selected
+      xywh {70 0 415 320} box THIN_DOWN_FRAME resizable
+      class PlayField
+    }
+  }
+}
