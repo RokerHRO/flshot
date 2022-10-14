@@ -1,8 +1,11 @@
 .PHONY: all clean
 
-CXX=c++ -Wall -g -O0 -std=c++11 # -fopenmp
+CXX=c++ -Wall -g -O0 -std=c++14 # -fopenmp
 
-all: flshot
+all: flbaby flshot
+
+flbaby: flbaby.o mywindow.o
+	${CXX}  -o $@ $^ -lfltk
 
 flshot: flshot.o playfield.o
 	${CXX}  -o $@ $^ -lfltk -lfltk_images
@@ -13,8 +16,11 @@ flshot: flshot.o playfield.o
 %.o : %.cc %.hh
 	${CXX} -c $<
 
+flbaby.o : flbaby.cxx flbaby.h
+	${CXX} -c $<
+
 flshot.o : flshot.cxx flshot.h
 	${CXX} -c $<
 
 clean:
-	rm -vf *.o flshot
+	rm -vf *.o flbaby flshot

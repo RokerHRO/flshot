@@ -21,6 +21,26 @@ static Fl_Image* geist_eis  = nullptr;
 static Fl_Image* geist_schatten = nullptr;
 static Fl_Image* cannon_png = nullptr;
 
+using namespace std::literals::string_literals;
+
+
+Fl_Image* load_png_image(const char* filename)
+{
+	Fl_PNG_Image* img = new Fl_PNG_Image(filename);
+	
+	if(!img)
+	{
+		throw std::runtime_error( "Cannot create Fl_PNG_Image(\""s + filename + "\")!"s );
+	}
+	
+	if(img->fail())
+	{
+		throw std::runtime_error( "Cannot create Fl_PNG_Image(\""s + filename + "\"). errorcode=" + std::to_string(img->fail()) );
+	}
+	
+	return img;
+}
+
 
 Fl_Image* generateCannon(double angle)
 {
@@ -111,7 +131,7 @@ Sprite generateSprite(int w, int h)
 	dx = dx/d_len;
 	dy = dy/d_len;
 	
-//	Fl_Image* img = new Fl_PNG_Image("geist-lila.png");
+//	Fl_Image* img = load_png_image("geist-lila.png");
 	return Sprite(pos_x, pos_y, 6*dx, 6*dy);
 }
 
@@ -124,14 +144,14 @@ PlayField::PlayField(int x, int y, int w, int h, const char* title)
 {
 	srand48( time(0) + getpid() );
 
-	geist_lila =  new Fl_PNG_Image("geist-lila.png");
-	geist_rot  =  new Fl_PNG_Image("geist-rot.png");
-	geist_gelb =  new Fl_PNG_Image("geist-gelb.png");
-	geist_eis  =  new Fl_PNG_Image("geist-eis.png");
+	geist_lila =  load_png_image("geist-lila.png");
+	geist_rot  =  load_png_image("geist-rot.png");
+	geist_gelb =  load_png_image("geist-gelb.png");
+	geist_eis  =  load_png_image("geist-eis.png");
 	
-	geist_schatten = new Fl_PNG_Image("geist-schatten.png");
+	geist_schatten = load_png_image("geist-schatten.png");
 	
-	cannon_png = new Fl_PNG_Image("kanone.png");
+	cannon_png = load_png_image("kanone.png");
 	
 	fprintf(stderr, "### Kanone: d=%d count=%d, ld=%d ###\n",
 		cannon_png->d(),
