@@ -8,10 +8,9 @@
 #include <cstdlib> // for drand48()
 #include <unistd.h> // for getpid()
 #include <string>
-
+#include <stdexcept>
 
 XY<int> Sprite_Min, Sprite_Max;
-
 
 static Fl_Image* geist_lila = nullptr;
 static Fl_Image* geist_rot  = nullptr;
