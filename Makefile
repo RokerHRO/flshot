@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-CXX=c++ -Wall -g -O0 -std=c++14 # -fopenmp
+CXX=c++ -Wall -g -O0 -std=c++11 # -fopenmp
 
 all: flshot
 
@@ -17,4 +17,4 @@ flshot.o : flshot.cxx flshot.h
 	${CXX} -c $<
 
 clean:
-	rm -vf *.o flshot
+	rm -vf *.o flshot flshot.cxx flshot.h
