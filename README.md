@@ -1,2 +1,2 @@
 # flshot
-Simple 2D shooter game using FLTK and fluid
+Minimum example to demonstrate an FLTK or fluid bug.
